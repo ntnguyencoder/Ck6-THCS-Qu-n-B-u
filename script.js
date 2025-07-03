@@ -1,16 +1,6 @@
-// script.js
-
-function randomChibi() {
-  const list = [
-    "https://api.dicebear.com/7.x/thumbs/svg?seed=Jack",
-    "https://api.dicebear.com/7.x/thumbs/svg?seed=Lucy",
-    "https://api.dicebear.com/7.x/thumbs/svg?seed=Milo",
-    "https://api.dicebear.com/7.x/thumbs/svg?seed=Nina",
-    "https://api.dicebear.com/7.x/thumbs/svg?seed=Oscar",
-    "https://api.dicebear.com/7.x/thumbs/svg?seed=Peach"
-  ];
-  return list[Math.floor(Math.random() * list.length)];
-}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { randomChibi } from './assets/avatars/avatars.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoFW_IusPuqae34sAJwkik2Kw5_Set7yI",
@@ -23,9 +13,6 @@ const firebaseConfig = {
   measurementId: "G-HM12QDKV0T"
 };
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, set, onValue, get, push, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
@@ -36,20 +23,14 @@ const addForm = document.getElementById("add-form");
 const studentList = document.getElementById("student-list");
 const searchInput = document.getElementById("search");
 const logoutBtn = document.getElementById("logout");
-const darkToggle = document.getElementById("dark-toggle");
-
-let currentUser = null;
+const adminPanel = document.getElementById("admin-panel");
 
 const ADMIN = {
-  main: {
-    username: "admin",
-    password: "ck62025"
-  },
-  sub: {
-    username: "phuadmin",
-    password: "phu2025"
-  }
+  main: { username: "admin", password: "ck62025" },
+  sub: { username: "phuadmin", password: "phu2025" }
 };
+
+let currentUser = null;
 
 loginForm.onsubmit = (e) => {
   e.preventDefault();
@@ -61,17 +42,16 @@ loginForm.onsubmit = (e) => {
   ) {
     currentUser = user;
     loginScreen.classList.add("hidden");
-    mainScreen.classList.remove("hidden");
-    fetchStudents();
+    adminPanel.classList.remove("hidden");
   } else {
-    alert("Sai thông tin đăng nhập");
+    alert("Sai tài khoản hoặc mật khẩu");
   }
 };
 
 logoutBtn.onclick = () => {
   currentUser = null;
+  adminPanel.classList.add("hidden");
   loginScreen.classList.remove("hidden");
-  mainScreen.classList.add("hidden");
 };
 
 function renderStudent(id, data) {
@@ -87,7 +67,6 @@ function renderStudent(id, data) {
       <p>🔗 <a href="${data.social}" target="_blank">${data.social}</a></p>
       <p>❤️ ${data.hobby}</p>
       <p>🕒 Thêm: ${data.createdAt}</p>
-      <p>👁️ Xem bởi: ${data.viewedBy || "Chưa ai"}</p>
       ${currentUser === ADMIN.main.username ? `<button onclick="deleteStudent('${id}')">❌ Xóa</button>` : ""}
     </div>
   `;
@@ -99,9 +78,11 @@ function fetchStudents() {
     studentList.innerHTML = "";
     const data = snapshot.val();
     if (data) {
-      Object.keys(data).sort((a, b) => new Date(data[b].createdAt) - new Date(data[a].createdAt)).forEach((id) => {
-        renderStudent(id, data[id]);
-      });
+      Object.keys(data)
+        .sort((a, b) => new Date(data[b].createdAt) - new Date(data[a].createdAt))
+        .forEach((id) => {
+          renderStudent(id, data[id]);
+        });
     }
   });
 }
@@ -118,19 +99,13 @@ addForm.onsubmit = (e) => {
     social: addForm.social.value,
     dob: addForm.dob.value,
     avatar: addForm.avatar.value || randomChibi(),
-    createdAt: new Date().toISOString(),
-    viewedBy: currentUser
+    createdAt: new Date().toISOString()
   };
   const newRef = push(ref(db, "students"));
   set(newRef, student).then(() => {
     addForm.reset();
   });
 };
-
-function deleteStudent(id) {
-  if (!confirm("Bạn có chắc muốn xóa?")) return;
-  set(ref(db, "students/" + id), null);
-}
 
 searchInput.oninput = function () {
   const keyword = this.value.toLowerCase();
@@ -139,6 +114,4 @@ searchInput.oninput = function () {
   });
 };
 
-darkToggle.onclick = function () {
-  document.body.classList.toggle("dark");
-};
+fetchStudents(); // Danh sách luôn hiển thị với mọi người
