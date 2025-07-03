@@ -1,47 +1,41 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quản lý lớp CK6</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <title>Danh sách lớp CK6</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js" type="module"></script>
 </head>
 <body>
-  <div id="login-screen" class="screen">
-    <h2>🔐 Đăng nhập Admin</h2>
-    <form id="login-form">
-      <input type="text" id="username" placeholder="Tên admin" required />
-      <input type="password" id="password" placeholder="Mật khẩu" required />
-      <button type="submit">Đăng nhập</button>
-    </form>
+  <div id="main-screen">
+    <h1>📘 DANH SÁCH LỚP CK6</h1>
+    <input type="text" id="search" placeholder="Tìm kiếm theo tên, vai trò, sở thích...">
+    <ul id="student-list"></ul>
+
+    <div id="admin-panel" class="hidden">
+      <h2>🔐 Quản lý lớp</h2>
+      <form id="add-form">
+        <input name="name" placeholder="Tên" required>
+        <input name="age" placeholder="Tuổi" required>
+        <input name="role" placeholder="Vai trò">
+        <input name="hobby" placeholder="Sở thích">
+        <input name="phone" placeholder="Điện thoại">
+        <input name="social" placeholder="Link MXH">
+        <input name="dob" placeholder="Ngày sinh (dd/mm/yyyy)">
+        <input name="avatar" placeholder="Link ảnh (hoặc để trống)">
+        <button type="submit">➕ Thêm</button>
+      </form>
+      <button id="logout">🚪 Đăng xuất</button>
+    </div>
   </div>
 
-  <div id="main-screen" class="screen hidden">
-    <header>
-      <h1>📚 Quản lý lớp CK6</h1>
-      <button id="logout">Thoát</button>
-    </header>
-
-    <section>
-      <input type="text" id="search" placeholder="Tìm kiếm..." />
-      <button id="dark-toggle">🌚 / ☀️</button>
-    </section>
-
-    <form id="add-form">
-      <input id="name" placeholder="Tên" required />
-      <input id="age" placeholder="Tuổi" required />
-      <input id="role" placeholder="Vai trò" required />
-      <input id="hobby" placeholder="Sở thích" />
-      <input id="phone" placeholder="Số điện thoại" />
-      <input id="social" placeholder="Link MXH" />
-      <input id="dob" placeholder="Ngày sinh (yyyy-mm-dd)" />
-      <input id="avatar" placeholder="Link avatar (nếu có)" />
-      <button type="submit">➕ Thêm bạn</button>
+  <div id="login-screen">
+    <h2>Đăng nhập quản trị</h2>
+    <form id="login-form">
+      <input name="username" placeholder="Tài khoản" required>
+      <input name="password" placeholder="Mật khẩu" type="password" required>
+      <button type="submit">Đăng nhập</button>
     </form>
-
-    <ul id="student-list"></ul>
   </div>
 </body>
 </html>
