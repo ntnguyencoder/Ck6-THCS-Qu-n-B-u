@@ -1,0 +1,47 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý lớp CK6</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+  <div id="login-screen" class="screen">
+    <h2>🔐 Đăng nhập Admin</h2>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Tên admin" required />
+      <input type="password" id="password" placeholder="Mật khẩu" required />
+      <button type="submit">Đăng nhập</button>
+    </form>
+  </div>
+
+  <div id="main-screen" class="screen hidden">
+    <header>
+      <h1>📚 Quản lý lớp CK6</h1>
+      <button id="logout">Thoát</button>
+    </header>
+
+    <section>
+      <input type="text" id="search" placeholder="Tìm kiếm..." />
+      <button id="dark-toggle">🌚 / ☀️</button>
+    </section>
+
+    <form id="add-form">
+      <input id="name" placeholder="Tên" required />
+      <input id="age" placeholder="Tuổi" required />
+      <input id="role" placeholder="Vai trò" required />
+      <input id="hobby" placeholder="Sở thích" />
+      <input id="phone" placeholder="Số điện thoại" />
+      <input id="social" placeholder="Link MXH" />
+      <input id="dob" placeholder="Ngày sinh (yyyy-mm-dd)" />
+      <input id="avatar" placeholder="Link avatar (nếu có)" />
+      <button type="submit">➕ Thêm bạn</button>
+    </form>
+
+    <ul id="student-list"></ul>
+  </div>
+</body>
+</html>
