@@ -1,0 +1,51 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #eef2f3, #ffffff);
+  margin: 0;
+  padding: 20px;
+}
+h1, h2, h3 {
+  text-align: center;
+}
+form, .student-card, #admin-panel {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px auto;
+  max-width: 700px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #2980b9;
+}
+ul#student-list {
+  list-style: none;
+  padding: 0;
+}
+.student-card {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.student-card img.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}

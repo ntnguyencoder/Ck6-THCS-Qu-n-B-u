@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý lớp CK6</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+  <div id="login-screen">
+    <h2>🔐 Đăng nhập quản trị</h2>
+    <form id="login-form">
+      <input name="username" placeholder="Tài khoản" required>
+      <input name="password" type="password" placeholder="Mật khẩu" required>
+      <button>Đăng nhập</button>
+    </form>
+  </div>
+
+  <div id="main-screen">
+    <p id="welcome-msg"></p>
+    <button id="logout" class="hidden">🚪 Đăng xuất</button>
+
+    <h1>📘 Danh sách lớp CK6</h1>
+    <input type="text" id="search" placeholder="Tìm kiếm theo tên, vai trò, sở thích...">
+    <ul id="student-list"></ul>
+
+    <form id="add-form" class="hidden">
+      <h3>➕ Thêm thành viên</h3>
+      <input name="name" placeholder="Họ tên" required>
+      <input name="age" type="number" placeholder="Tuổi" required>
+      <input name="role" placeholder="Vai trò">
+      <input name="hobby" placeholder="Sở thích">
+      <input name="phone" placeholder="Số điện thoại">
+      <input name="social" placeholder="Link MXH">
+      <input name="dob" type="date" placeholder="Ngày sinh">
+      <input name="avatar" placeholder="Link avatar (hoặc để trống)">
+      <button>Thêm bạn</button>
+    </form>
+
+    <section id="admin-panel" class="hidden">
+      <h3>👥 Quản lý admin phụ</h3>
+      <form id="add-subadmin-form">
+        <input name="username" placeholder="Tên admin phụ" required>
+        <input name="password" placeholder="Mật khẩu" required>
+        <button>➕ Thêm admin phụ</button>
+      </form>
+      <ul id="subadmin-list"></ul>
+    </section>
+  </div>
+</body>
+</html>
